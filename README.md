@@ -1,6 +1,6 @@
 ## 手动映射注入DLL
 
-![](./images/ui.png)
+![](./images/ui-v1.1.0.png)
 
 ## 项目打包
 1. 先构建MinGw32-bit和MinGw64-bit两个版本

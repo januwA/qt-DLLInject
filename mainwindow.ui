@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>600</width>
-    <height>143</height>
+    <width>610</width>
+    <height>227</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -50,11 +50,18 @@
      </layout>
     </item>
     <item>
-     <widget class="QPushButton" name="pushButton_3">
-      <property name="text">
-       <string>注入</string>
-      </property>
-     </widget>
+     <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="1,2">
+      <item>
+       <widget class="QComboBox" name="comboBox"/>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_3">
+        <property name="text">
+         <string>注入</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </item>
    </layout>
   </widget>
@@ -63,12 +70,37 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>600</width>
-     <height>22</height>
+     <width>610</width>
+     <height>23</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menu">
+    <property name="title">
+     <string>关于</string>
+    </property>
+    <addaction name="actionasd_1"/>
+    <addaction name="actionasd_2"/>
+    <addaction name="separator"/>
+    <addaction name="actionasd_3"/>
+   </widget>
+   <addaction name="menu"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionasd_1">
+   <property name="text">
+    <string>查看源码</string>
+   </property>
+  </action>
+  <action name="actionasd_2">
+   <property name="text">
+    <string>查看所有版本</string>
+   </property>
+  </action>
+  <action name="actionasd_3">
+   <property name="text">
+    <string>v1.1.0</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>

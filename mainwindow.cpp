@@ -1,12 +1,15 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "ManualMap.cpp"
+#include "injectMethods/ManualMap.cpp"
+#include "injectMethods/NormalInject.cpp"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    initMenu();
+    initComboBoxItems();
 }
 
 MainWindow::~MainWindow()
@@ -57,19 +60,52 @@ void MainWindow::on_pushButton_3_clicked()
     uint pid =  pidHex.toUInt(&bStatus, 16);
 
     HANDLE hProcess = OpenProcess(PROCESS_ALL_ACCESS, FALSE, pid);
-    if (!hProcess) {
+    if (!hProcess)
+    {
         QMessageBox::information(this, NULL, "打开进程失败!!!");
         return;
     }
 
-    if(ManualMap(this, hProcess, ui->lineEdit_2->text().toStdString() ))
+    int selectIndex = ui->comboBox->currentIndex();
+    if(selectIndex == 0)
     {
-        // QMessageBox::information(this, NULL, "注入成功");
+        if(!NormalInject(hProcess,dllpath.toStdString().c_str() ))
+        {
+            QMessageBox::information(this, NULL, "注入失败");
+        }
     }
-    else
+    else if(selectIndex == 1)
     {
-        QMessageBox::information(this, NULL, "注入失败");
+
+        if(!ManualMap(this, hProcess, dllpath.toStdString() ))
+        {
+            QMessageBox::information(this, NULL, "注入失败");
+        }
     }
 
     CloseHandle(hProcess);
+}
+
+void MainWindow::on_menu1_1()
+{
+
+    QString URL = "https://github.com/januwA/qt-DLLInject";
+    QDesktopServices::openUrl(QUrl(URL.toLatin1()));
+}
+void MainWindow::on_menu1_2()
+{
+    QString URL = "https://github.com/januwA/qt-DLLInject/releases";
+    QDesktopServices::openUrl(QUrl(URL.toLatin1()));
+}
+void MainWindow::initComboBoxItems()
+{
+    ui->comboBox->addItem("普通的线程注入");
+    ui->comboBox->addItem("手动映射DLL");
+}
+
+void MainWindow::initMenu()
+{
+    connect(ui->actionasd_1, SIGNAL(triggered()), this, SLOT(on_menu1_1()));
+    connect(ui->actionasd_2, SIGNAL(triggered()), this, SLOT(on_menu1_2()));
+    ui->actionasd_3->setText(version);
 }

@@ -10,6 +10,7 @@
 #include <QFileDialog>
 #include <QFile>
 #include <QMessageBox>
+#include <qdesktopservices.h>
 #include "processlistwindow.h"
 
 QT_BEGIN_NAMESPACE
@@ -21,6 +22,7 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
+    QString version = "v1.1.0"; // 字符串x.y.z版本号
     ProcessListWIndow *processListWIndow;
     QString str;
     QString selectText;
@@ -37,8 +39,12 @@ private slots:
     void on_pushButton_2_clicked();
 
     void on_pushButton_3_clicked();
+    void on_menu1_1();// 查看源码
+    void on_menu1_2();// 查看所有版本
 
 private:
     Ui::MainWindow *ui;
+    void initComboBoxItems();
+    void initMenu();
 };
 #endif // MAINWINDOW_H
