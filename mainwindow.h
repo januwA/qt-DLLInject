@@ -22,7 +22,7 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    QString version = "v1.1.0"; // 字符串x.y.z版本号
+    QString version = "v1.2.0"; // 字符串x.y.z版本号
     ProcessListWIndow *processListWIndow;
     QString str;
     QString selectText;

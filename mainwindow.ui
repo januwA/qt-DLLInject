@@ -13,6 +13,48 @@
   <property name="windowTitle">
    <string>DLL Inject</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">/* https://doc.qt.io/Qt-5/stylesheet-syntax.html */
+
+* {
+  font-size: 14px;
+  background-color: #302b2b;
+  color: blanchedalmond;
+}
+QPushButton {
+  background-color: rgb(0, 0, 0);
+  padding: 6px;
+  border-radius: 6px;
+  border: 1px solid blanchedalmond;
+}
+QPushButton:hover {
+  background-color: #424242;
+}
+QLineEdit {
+  padding: 6px;
+}
+
+#pushButton_3 {
+  color: red;
+}
+#comboBox {
+  padding: 6px 0;
+}
+
+/* https://doc.qt.io/qt-5/stylesheet-examples.html#customizing-qmenubar */
+QMenuBar::item:selected {
+  background-color: #424242;
+}
+
+/* https://doc.qt.io/qt-5/stylesheet-examples.html#customizing-qmenu */
+QMenu {
+  border: 1px solid blanchedalmond;
+}
+QMenu::item:selected {
+  background-color: #424242;
+}
+</string>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout" stretch="0,0,0">
     <property name="spacing">
@@ -22,7 +64,7 @@
      <number>9</number>
     </property>
     <item>
-     <layout class="QHBoxLayout" name="horizontalLayout">
+     <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,4">
       <item>
        <widget class="QPushButton" name="pushButton">
         <property name="text">
@@ -36,7 +78,7 @@
      </layout>
     </item>
     <item>
-     <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="1,4">
       <item>
        <widget class="QPushButton" name="pushButton_2">
         <property name="text">
@@ -71,10 +113,10 @@
      <x>0</x>
      <y>0</y>
      <width>610</width>
-     <height>23</height>
+     <height>26</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menu">
+   <widget class="QMenu" name="menu_1">
     <property name="title">
      <string>关于</string>
     </property>
@@ -83,9 +125,8 @@
     <addaction name="separator"/>
     <addaction name="actionasd_3"/>
    </widget>
-   <addaction name="menu"/>
+   <addaction name="menu_1"/>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
   <action name="actionasd_1">
    <property name="text">
     <string>查看源码</string>

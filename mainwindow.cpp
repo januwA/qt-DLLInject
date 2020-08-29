@@ -45,13 +45,13 @@ void MainWindow::on_pushButton_3_clicked()
 {
     if( selectText.isEmpty() )
     {
-        QMessageBox::information(this, NULL, "选择进程!!!");
+        QMessageBox::warning(this, NULL, "选择进程!!!", QMessageBox::Ok);
         return;
     }
 
     if( dllpath.isEmpty() )
     {
-        QMessageBox::information(this, NULL, "选择DLL文件!!!");
+        QMessageBox::warning(this, NULL, "选择DLL文件!!!",QMessageBox::Ok);
         return;
     }
 
