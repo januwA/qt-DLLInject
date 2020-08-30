@@ -2,10 +2,13 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+
+#include <iostream>
 #include <windows.h>
 #include <psapi.h>
 #include <tlhelp32.h>
-#include <iostream>
+#include <winbase.h>
+
 #include <QDebug>
 #include <QFileDialog>
 #include <QFile>
@@ -22,7 +25,7 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    QString version = "v1.2.0"; // 字符串x.y.z版本号
+    QString version = "v1.3.0"; // 字符串x.y.z版本号
     ProcessListWIndow *processListWIndow;
     QString str;
     QString selectText;

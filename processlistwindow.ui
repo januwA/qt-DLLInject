@@ -17,7 +17,7 @@
    <item>
     <widget class="QLineEdit" name="lineEdit">
      <property name="placeholderText">
-      <string>搜索</string>
+      <string>Search Name</string>
      </property>
     </widget>
    </item>

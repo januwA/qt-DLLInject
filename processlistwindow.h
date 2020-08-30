@@ -2,12 +2,15 @@
 #define PROCESSLISTWINDOW_H
 
 #include <QDialog>
-#include <windows.h>
-#include <psapi.h>
-#include <tlhelp32.h>
+
 #include <iostream>
+#include <windows.h>
+#include <tlhelp32.h>
+#include <psapi.h>
+
 #include <QDebug>
 #include <qpixmap.h>
+#include <QFileSystemModel>
 
 namespace Ui {
 class ProcessListWIndow;

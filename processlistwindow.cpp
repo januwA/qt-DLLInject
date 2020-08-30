@@ -2,6 +2,10 @@
 #include "ui_processlistwindow.h"
 #include "mainwindow.h"
 
+#include <windows.h>
+#include <tlhelp32.h>
+#include <psapi.h>
+
 ProcessListWIndow::ProcessListWIndow(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::ProcessListWIndow)
@@ -10,7 +14,7 @@ ProcessListWIndow::ProcessListWIndow(QWidget *parent) :
     connect(
                 ui->lineEdit, SIGNAL( textEdited(QString) ),
                 this, SLOT(list_filter(QString))
-            );
+                );
 
     HANDLE hSnap = CreateToolhelp32Snapshot(PROCESS_ALL_ACCESS, 0);
     if( hSnap != INVALID_HANDLE_VALUE )
@@ -19,19 +23,33 @@ ProcessListWIndow::ProcessListWIndow(QWidget *parent) :
         pe.dwSize = sizeof(pe);
         if( Process32First(hSnap, &pe) )
         {
-            DWORD curID = GetCurrentThreadId();
             do{
-                if(pe.th32ProcessID && pe.th32ProcessID != curID)
+                if(pe.th32ProcessID != GetCurrentProcessId())
                 {
+                    // https://forum.qt.io/topic/62866/getting-icon-from-external-applications/5
+                    // https://stackoverflow.com/questions/63653786/error-using-getmodulefilenameexa-function-in-qt?noredirect=1#comment112561229_63653786
+
+
+
+                    HANDLE hProcess = OpenProcess(PROCESS_ALL_ACCESS, FALSE, pe.th32ProcessID);
+                    char lpFilename[1024];
+                    GetModuleFileNameExA(hProcess, NULL, lpFilename, sizeof(lpFilename));
+                    CloseHandle(hProcess);
+
+                    QFileInfo  fin( lpFilename );
+                    QFileSystemModel *model = new QFileSystemModel;
+                    model->setRootPath(fin.path());
+                    QIcon ic = model->fileIcon(model->index(fin.filePath()));
+
                     QListWidgetItem *it = new QListWidgetItem(
-                                /* QIcon(""), */
+                                ic,
                                 PaddingZero(QString::number(pe.th32ProcessID, 16)).toUpper() +
                                 "-" +
                                 QString::fromWCharArray(pe.szExeFile),
                                 ui->list
-                     );
+                                );
                     ui->list->addItem(it);
-                    //printf("name: %ls, id: %d\n",pe.szExeFile,pe.th32ProcessID);
+                    // printf("name: %ls, pid: %d\n",pe.szExeFile,pe.th32ProcessID);
                 }
             }while( Process32Next(hSnap, &pe) );
         }

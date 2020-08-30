@@ -30,6 +30,9 @@ FORMS += \
     mainwindow.ui \
     processlistwindow.ui
 
+LIBS += \
+    -lPsapi
+
 RC_ICONS = dll_inject.ico
 
 # Default rules for deployment.

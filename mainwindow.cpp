@@ -3,6 +3,8 @@
 #include "injectMethods/ManualMap.cpp"
 #include "injectMethods/NormalInject.cpp"
 
+
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
