@@ -29,14 +29,12 @@ ProcessListWIndow::ProcessListWIndow(QWidget *parent) :
                     // https://forum.qt.io/topic/62866/getting-icon-from-external-applications/5
                     // https://stackoverflow.com/questions/63653786/error-using-getmodulefilenameexa-function-in-qt?noredirect=1#comment112561229_63653786
 
-
-
-                    HANDLE hProcess = OpenProcess(PROCESS_ALL_ACCESS, FALSE, pe.th32ProcessID);
-                    char lpFilename[1024];
-                    GetModuleFileNameExA(hProcess, NULL, lpFilename, sizeof(lpFilename));
+                    HANDLE hProcess = OpenProcess(PROCESS_QUERY_INFORMATION, FALSE, pe.th32ProcessID);
+                    wchar_t lpFilename[1024];
+                    GetModuleFileNameExW(hProcess, NULL, lpFilename, sizeof(lpFilename));
                     CloseHandle(hProcess);
 
-                    QFileInfo  fin( lpFilename );
+                    QFileInfo  fin( QString::fromWCharArray(lpFilename) );
                     QFileSystemModel *model = new QFileSystemModel;
                     model->setRootPath(fin.path());
                     QIcon ic = model->fileIcon(model->index(fin.filePath()));
